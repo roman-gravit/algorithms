@@ -9,16 +9,16 @@ export { SortArrayBubble, SortArrayModifiedBubble };
  * 
  * ADD FLAG if there was no swap - we can BREAK the loop, sort is complete
  * 
- * TIME COMPLEXITY: O(N^2)
- *    Best Case: O(N^2)  
- *    Worst Case: O(N^2)
+ * TIME COMPLEXITY: O(n^2)
+ *    Best Case: O(n)  
+ *    Worst Case: O(n^2)
  * 
- * SPACE COMPLEXITY: O(logN) 
+ * SPACE COMPLEXITY: O(1)
  * 
  * @param array 
  * @returns sorted array
  */
-function SortArrayModifiedBubble(array: number[]): number[] {
+function SortArrayModifiedBubble(array:Array<number>): Array<number> {
     let was_swapped = false;
     for(let i = 0; i < array.length; i++) {
         for(let j=0; j < array.length - 1; j++) {
@@ -45,7 +45,7 @@ function SortArrayModifiedBubble(array: number[]): number[] {
  * and then move on to compare the second and third element, and so on.
  * 
  * TIME COMPLEXITY: O(n^2)
- *    Best Case: O(n^2)  
+ *    Best Case: O(n)  
  *    Worst Case: O(n^2)
  * 
  * SPACE COMPLEXITY: O(1) 
