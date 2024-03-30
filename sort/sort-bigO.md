@@ -3,9 +3,9 @@
 Big O notation, represents an algorithm's worst-case complexity. 
 It uses algebraic terms to describe the complexity of an algorithm.
 
-                  ------- Time Complexity -------   -- Space --
-
-|                |      Best   |  Average |  Worst   |   Worst
+                
+|                |    Time     |   Time   |  Time    |   Space 
+|                |    Best     |  Average |  Worst   |   Worst
 |----------------|:-----------:|---------:|---------:|---------:|
 | Bubble Sort    |    O(n)     | O(n^2)   | O(n^2)   |   O(1)
 | Insertion Sort |    O(n)     | O(n^2)   | O(n^2)   |   O(1)
