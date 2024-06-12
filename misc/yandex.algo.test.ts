@@ -1,4 +1,31 @@
-import { FindNonMinOrMax, FindNumberOfPairsForce, FindNumberOfPairsTwoPointers, LeftBinSearch } from "./yandex.algo";
+import { FindNonMinOrMax, FindNumberOfPairsForce, FindNumberOfPairsTwoPointers, LeftBinSearch, GetLuckyNumber, 
+	QueryObjectify
+} from "./yandex.algo";
+
+test("QueryObjectify", () => {
+	// user.name.firstname=Bob&user.name.lastname=Smith&user.color=Light%20Blue&experiments.theme=dark
+	const result = QueryObjectify("user.name.firstname=Bob&user.name.lastname=Smith&user.color=Light%20Blue&experiments.theme=dark");
+	expect(result).toMatchObject({
+		"user": {
+			"name": {
+				"firstname": "Bob",
+				"lastname": "Smith"
+			},
+			"color": "Light Blue"
+		},
+		"experiments": {
+			"theme": "dark"
+		}
+	});
+});
+
+
+test("GetLuckyNumber", () => {
+	expect(GetLuckyNumber(112333455555)).toBe(5);
+	expect(GetLuckyNumber(123345)).toBe(1);
+	expect(GetLuckyNumber(55555)).toBe(5);
+	expect(GetLuckyNumber(5555)).toBe(0);
+});
 
 test("LeftBinSearch", () => {
 	expect(LeftBinSearch([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 7)).toBe(7);

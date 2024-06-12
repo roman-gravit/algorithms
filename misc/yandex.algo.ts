@@ -1,32 +1,78 @@
-export { FindNonMinOrMax, FindNumberOfPairsForce, FindNumberOfPairsTwoPointers, LeftBinSearch};
+export { FindNonMinOrMax, FindNumberOfPairsForce, FindNumberOfPairsTwoPointers, LeftBinSearch, GetLuckyNumber, QueryObjectify};
 
-/**
- * Concatenation of Array
- * Given an integer array nums of length n, 
- * you want to create an array ans of length 2n where ans[i] == nums[i] and ans[i + n] == nums[i] for 0 <= i < n (0-indexed).
- * 
- * Specifically, ans is the concatenation of two nums arrays.
- * 
- * Return the array ans.
- * 
- * Constraints:
- * n == nums.length
- * 1 <= n <= 1000
- * 1 <= nums[i] <= 1000
- * 
- * Example: 
- * Input: nums = [1,2,1]
- * Output: [1,2,1,1,2,1]
- * Explanation: The array ans is formed as follows: 
- * ans = [nums[0],nums[1],nums[2],nums[0],nums[1],nums[2]]
- * ans = [1,2,1,1,2,1]
- */
-function ConcatArray(nums: Array<number>): Array<number> {
-	// Constraints: 1 <= n <= 1000
-	
-	let ans = new Array<number>(nums.length * 2);
+// user.name.firstname=Bob&user.name.lastname=Smith&user.color=Light%20Blue&experiments.theme=dark
+// user.name.firstname=Bob
+// user.name.lastname=Smith
+// user.color=Light%20Blue
+// experiments.theme=dark
 
-	return ans;
+interface obj {
+	user?: {
+		name?: {
+			firstname?: string;
+			lastname?: string;
+		},
+		color?: string;
+	},
+	experiments?: {
+		theme?: string;
+	}
+}
+function QueryObjectify(str: string): object {
+	let res: obj = {};
+
+	const parts = str.split("&");
+
+	for(let part of parts) {
+		
+		const propety_value = part.split("=");  // user.name.firstname |  Bob
+
+		const properties = propety_value[0].split(".");  // user name firstname
+
+		let inner_object = res;
+		for(let prop=0; prop<properties.length; prop++) {
+			const name = properties[prop];
+			let new_property_value = 
+				prop!==properties.length -1 ? {} : decodeURIComponent(propety_value[1]);
+
+			if(!inner_object.hasOwnProperty(name)) {
+				Object.defineProperty(inner_object, name, {
+						value: new_property_value,
+						writable: true
+				});
+				inner_object = new_property_value;
+
+			} else {
+				const descriptor = Object.getOwnPropertyDescriptor(inner_object, name);
+				inner_object = descriptor?.value;
+			}
+
+		}
+	}
+
+	return res;
+}
+
+function GetLuckyNumber(nums: number): number {
+	const nums_string = String(nums);	
+	const map = new Map<string, number>();
+
+	for(let s of nums_string) {
+		let value = map.get(s);
+		if(value===undefined) {
+			value = 0;
+		}
+		map.set(s, ++value);
+	}
+
+	let result = 0;
+	for (const entry of map.entries()) {
+		if(parseInt(entry[0]) === entry[1]) {
+			result = Math.max(result, entry[1]);
+		}
+	}
+
+	return result;
 }
 
 /**
