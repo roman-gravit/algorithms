@@ -1,25 +1,53 @@
-export { FindNonMinOrMax, FindNumberOfPairsForce, FindNumberOfPairsTwoPointers, LeftBinSearch, GetLuckyNumber, QueryObjectify};
+export { FindNonMinOrMax, FindNumberOfPairsForce, FindNumberOfPairsTwoPointers, LeftBinSearch, GetLuckyNumber, QueryObjectify, AddNewCategories, 
+	CategoryData, Category, AddNewCategoriesResult
+};
+
+
+interface CategoryData {
+	title: string;
+	level: number;
+	parent?: number;
+	children?: Array<number>;
+}
+
+type Category = {
+	[key: number]: CategoryData;
+}
+
+type AddNewCategoriesResult = [Category,  Array<number>];
+
+
+function AddNewCategories(categories: Readonly<Category>, 
+						  root: ReadonlyArray<number>, 
+						  categories_to_add: Readonly<Category>
+						 ): AddNewCategoriesResult
+{
+	const new_categories = {... categories};
+	const new_root = [...root];
+
+	for (const [key, category_data] of Object.entries(categories_to_add)) {
+
+		const key_int = parseInt(key);
+
+		new_categories[key_int] = category_data;
+
+		if(category_data.level === 0) {
+			new_root.push(key_int);
+		} else {
+			new_categories[category_data.parent || 0].children?.push(key_int);
+		}
+	}
+
+	return [new_categories, new_root];
+} 
 
 // user.name.firstname=Bob&user.name.lastname=Smith&user.color=Light%20Blue&experiments.theme=dark
 // user.name.firstname=Bob
 // user.name.lastname=Smith
 // user.color=Light%20Blue
 // experiments.theme=dark
-
-interface obj {
-	user?: {
-		name?: {
-			firstname?: string;
-			lastname?: string;
-		},
-		color?: string;
-	},
-	experiments?: {
-		theme?: string;
-	}
-}
 function QueryObjectify(str: string): object {
-	let res: obj = {};
+	let res: object = {};
 
 	const parts = str.split("&");
 
