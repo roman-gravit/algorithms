@@ -1,7 +1,16 @@
 import { FindNonMinOrMax, FindNumberOfPairsForce, FindNumberOfPairsTwoPointers, LeftBinSearch, GetLuckyNumber, 
-	QueryObjectify, AddNewCategories, Category, AddNewCategoriesResult
+	QueryObjectify, AddNewCategories, Category, AddNewCategoriesResult, ChangeVowelInString
 } from "./yandex.algo";
 
+test("ChangeVowelInString", () => {
+
+	let result = ChangeVowelInString("hannah bo fee, fy,. a a!", "i");
+	expect(result).toEqual("hinnih bi fii, fy,. i i!");
+
+	result = ChangeVowelInString("adira wants to go to the park", 'o');
+	expect(result).toEqual('odoro wonts to go to tho pork');
+
+});
 
 test("AddNewCategories", () => {
 

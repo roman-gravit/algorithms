@@ -1,6 +1,24 @@
 export { FindNonMinOrMax, FindNumberOfPairsForce, FindNumberOfPairsTwoPointers, LeftBinSearch, GetLuckyNumber, QueryObjectify, AddNewCategories, 
-	CategoryData, Category, AddNewCategoriesResult
+	CategoryData, Category, AddNewCategoriesResult, ChangeVowelInString
 };
+
+
+function ChangeVowelInString(input: string, vowel: string): string {
+	const vowels = /[aeuio]/gi;
+	const array = input.split("");
+	const res = array.reduce((accumulator ,item) => {
+		const match = item.match(vowels)?.length || 0;
+		if(match) {
+			accumulator.push(vowel);
+		} else {
+			accumulator.push(item);
+		}
+		return accumulator;
+	  }, Array<string>());
+
+	const result = res.join("");
+	return result;
+}
 
 
 interface CategoryData {
