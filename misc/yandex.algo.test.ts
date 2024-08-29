@@ -1,6 +1,19 @@
 import { FindNonMinOrMax, FindNumberOfPairsForce, FindNumberOfPairsTwoPointers, LeftBinSearch, GetLuckyNumber, 
-	QueryObjectify, AddNewCategories, Category, AddNewCategoriesResult, ChangeVowelInString
+	QueryObjectify, AddNewCategories, Category, AddNewCategoriesResult, ChangeVowelInString, IsMeetingInsideWorkingDay
 } from "./yandex.algo";
+
+test("scheduleMeeting", () => {
+	expect(IsMeetingInsideWorkingDay("16:00", 125)).toBe(false);
+	expect(IsMeetingInsideWorkingDay("7:00", 15)).toBe(false);
+	expect(IsMeetingInsideWorkingDay("07:15", 30)).toBe(false);
+	expect(IsMeetingInsideWorkingDay("7:30", 30)).toBe(true);
+	expect(IsMeetingInsideWorkingDay("11:30", 60)).toBe(true);
+	expect(IsMeetingInsideWorkingDay("17:00", 45)).toBe(true);
+	expect(IsMeetingInsideWorkingDay("17:30", 30)).toBe(false);
+	expect(IsMeetingInsideWorkingDay("18:00", 15)).toBe(false);
+	expect(IsMeetingInsideWorkingDay("16:00", 0)).toBe(true);
+	expect(IsMeetingInsideWorkingDay("18:10", 15)).toBe(false);
+});
 
 test("ChangeVowelInString", () => {
 

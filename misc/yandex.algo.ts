@@ -1,7 +1,40 @@
 export { FindNonMinOrMax, FindNumberOfPairsForce, FindNumberOfPairsTwoPointers, LeftBinSearch, GetLuckyNumber, QueryObjectify, AddNewCategories, 
-	CategoryData, Category, AddNewCategoriesResult, ChangeVowelInString
+	CategoryData, Category, AddNewCategoriesResult, ChangeVowelInString, IsMeetingInsideWorkingDay
 };
 
+
+function IsMeetingInsideWorkingDay(startTime: string, durationMinutes: number): boolean {
+	// parse start time 
+	// check if it starts earlier than dayStart
+	// check if it starts after dayEnd
+	// add duration to the startTime 
+	// check if it ends after dayEnd
+
+	const dayStart = "07:30";
+	const dayEnd = "17:45";
+
+	const [ , meetingStartHour, meetingStartMinutes ] = startTime.match(/^(\d{1,2}):(\d{2})$/) || [];
+
+	const durationHours = Math.floor(durationMinutes / 60);
+	durationMinutes = durationMinutes - (durationHours * 60);
+
+	let meetingEndHour = parseInt(meetingStartHour) + durationHours;
+	let meetingEndMinutes = parseInt(meetingStartMinutes) + durationMinutes;
+
+	if (meetingEndMinutes >= 60) {
+		meetingEndHour = meetingEndHour + 1;
+		meetingEndMinutes = meetingEndMinutes - 60;
+	}
+
+	const meetingStart = `${ meetingStartHour.padStart(2,"0") }:${meetingStartMinutes.padStart(2,"0")}`;
+
+	const meetingEnd = `${String(meetingEndHour).padStart(2,"0")}:${String(meetingEndMinutes).padStart(2,"0")}`;
+
+	const isStartsAfter = meetingStart >= dayStart;
+	const isEndsBefore = meetingEnd <= dayEnd;
+
+	return isStartsAfter && isEndsBefore;
+}
 
 function ChangeVowelInString(input: string, vowel: string): string {
 	const vowels = /[aeuio]/gi;
