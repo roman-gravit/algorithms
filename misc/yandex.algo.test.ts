@@ -1,8 +1,23 @@
 import { FindNonMinOrMax, FindNumberOfPairsForce, FindNumberOfPairsTwoPointers, LeftBinSearch, GetLuckyNumber, 
-	QueryObjectify, AddNewCategories, Category, AddNewCategoriesResult, ChangeVowelInString, IsMeetingInsideWorkingDay
+	QueryObjectify, AddNewCategories, Category, AddNewCategoriesResult, ChangeVowelInString, IsMeetingInsideWorkingDay,
+	CreateRange, RangeFunction
 } from "./yandex.algo";
 
-test("scheduleMeeting", () => {
+test("CreateRange", () => {
+	expect(CreateRange(3, 3)).toEqual([3]);
+	expect(CreateRange(3, 8)).toEqual([3, 4, 5, 6, 7, 8]);
+	expect(CreateRange(3, 0)).toEqual([]);
+
+	const start3 = CreateRange(3, undefined) as RangeFunction;
+	expect(start3(3)).toEqual([3]);
+	expect(start3(8)).toEqual([3, 4, 5, 6, 7, 8]);
+	expect(start3(0)).toEqual([]);
+
+	const start4 = CreateRange(4, undefined) as RangeFunction;
+	expect(start4(6)).toEqual([4, 5, 6]);
+});
+
+test("IsMeetingInsideWorkingDay", () => {
 	expect(IsMeetingInsideWorkingDay("16:00", 125)).toBe(false);
 	expect(IsMeetingInsideWorkingDay("7:00", 15)).toBe(false);
 	expect(IsMeetingInsideWorkingDay("07:15", 30)).toBe(false);

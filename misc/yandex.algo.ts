@@ -1,7 +1,29 @@
 export { FindNonMinOrMax, FindNumberOfPairsForce, FindNumberOfPairsTwoPointers, LeftBinSearch, GetLuckyNumber, QueryObjectify, AddNewCategories, 
-	CategoryData, Category, AddNewCategoriesResult, ChangeVowelInString, IsMeetingInsideWorkingDay
+	CategoryData, Category, AddNewCategoriesResult, ChangeVowelInString, IsMeetingInsideWorkingDay, CreateRange, RangeFunction
 };
 
+// Функция получает в первом аргументе число, представляющее первое числовое значение в диапазоне. 
+// Второй аргумент также является числом, представляющим вторую границу диапазона (включительно). 
+// Если второй аргумент опущен, должна возвращаться другая функция, которая рассчитывает получить этот аргумент.
+type RangeFunction = (end: number) =>  Array<number>;
+
+function CreateRange(start: number, end: number | undefined): Array<number> | RangeFunction {
+	if(end !== undefined) {
+		return _CreateRangeArray(start, end);
+	} 
+	
+	return function GetRangeEnd(second: number) {
+		return _CreateRangeArray(start, second);
+	}
+}
+
+function _CreateRangeArray(start: number, end: number):  Array<number> {
+	const range =  Array<number>();
+	for(let i = start; i <= end; i++) {
+		range.push(i);
+	}
+	return range;
+}
 
 function IsMeetingInsideWorkingDay(startTime: string, durationMinutes: number): boolean {
 	// parse start time 
