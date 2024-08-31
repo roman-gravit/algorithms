@@ -1,7 +1,15 @@
 import { FindNonMinOrMax, FindNumberOfPairsForce, FindNumberOfPairsTwoPointers, LeftBinSearch, GetLuckyNumber, 
 	QueryObjectify, AddNewCategories, Category, AddNewCategoriesResult, ChangeVowelInString, IsMeetingInsideWorkingDay,
-	CreateRange, RangeFunction
+	CreateRange, RangeFunction, SquareEachDigit
 } from "./yandex.algo";
+
+test("SquareEachDigit", () => {
+	expect(SquareEachDigit(31)).toBe(91);
+	expect(SquareEachDigit(0)).toBe(0);
+	expect(SquareEachDigit(1)).toBe(1);
+	expect(SquareEachDigit(22)).toBe(44);
+	expect(SquareEachDigit(9119)).toBe(811181);
+});
 
 test("CreateRange", () => {
 	expect(CreateRange(3, 3)).toEqual([3]);

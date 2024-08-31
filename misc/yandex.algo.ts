@@ -1,6 +1,123 @@
 export { FindNonMinOrMax, FindNumberOfPairsForce, FindNumberOfPairsTwoPointers, LeftBinSearch, GetLuckyNumber, QueryObjectify, AddNewCategories, 
-	CategoryData, Category, AddNewCategoriesResult, ChangeVowelInString, IsMeetingInsideWorkingDay, CreateRange, RangeFunction
+	CategoryData, Category, AddNewCategoriesResult, ChangeVowelInString, IsMeetingInsideWorkingDay, CreateRange, RangeFunction,
+	SquareEachDigit
 };
+
+
+function SquareEachDigit(num: number): number {
+
+	// types tests
+	{
+		// unknown: ANY
+		type UnkAny = unknown extends any ? true : false;       // TRUE
+		type UnkStr = unknown extends string ? true : false;    // false
+		type UnkVoid = unknown extends void ? true : false;     // false
+		type UnkUnd = unknown extends undefined ? true : false; // false
+		type UnkNull = unknown extends null ? true : false;     // false
+		type UnkNever = unknown extends never ? true : false;   // false
+
+		// Any: UNKNOWN
+		type AnyUnky = any extends unknown ? true : false;      // TRUE
+		type AnyStr = any extends string ? true : false;        // false
+		type AnyVoid = any extends void ? true : false;         // false
+		type AnyUnd = any extends undefined ? true : false;     // false
+		type AnyNull = any extends null ? true : false;         // false
+		type AnyNever = any extends never ? true : false;       // false
+
+		// null   UNKNOWN  ANY
+		type NullUnk = null extends unknown ? true : false;    // TRUE
+		type NullAny = null extends any ? true : false;        // TRUE
+		type NullStr = null extends string ? true : false;     // false
+		type NullUnd = null extends undefined ? true : false;  // false
+		type NullVoidNull = null extends void ? true : false;  // false
+		type NullNever = null extends never ? true : false;    // false
+
+		// Void:   UNKNOWN  ANY
+		type VoidAny = void extends any ? true : false;         // TRUE
+		type VoidStr = void extends string ? true : false;      // false
+		type VoidUnk = void extends unknown ? true : false;     // TRUE
+		type VoidUnd = void extends undefined ? true : false;   // false
+		type VoidNull = void extends null ? true : false;       // false
+		type VoidNever = void extends never ? true : false;     // false
+
+		// undefined   UNKNOWN  ANY  VOID
+		type UndUnk = undefined extends unknown ? true : false;  // TRUE
+		type UnddAny = undefined extends any ? true : false;     // TRUE
+		type UndVoidUnd = undefined extends void ? true : false; // TRUE
+		type UndStr = undefined extends string ? true : false;   // false
+		type UndNull = undefined extends null ? true : false;    // false
+		type UndNever = undefined extends never ? true : false;  // false
+
+		// string   UNKNOWN  ANY  
+		type StrUnk = string extends unknown ? true : false;     // TRUE
+		type StrAny = string extends any ? true : false;         // TRUE
+		type StrVoid = string extends void ? true : false;       // false
+		type StrObj = string extends object ? true : false;      // false
+		type StrNull = string extends null ? true : false;       // false
+		type StrNever = string extends never ? true : false;     // false
+
+		// never   UNKNOWN  ANY  
+		type nevUnk = never extends unknown ? true : false;     // TRUE
+		type nevAny = never extends any ? true : false;         // TRUE
+		type nevVoid = never extends void ? true : false;       // TRUE
+		type nevund = never extends undefined ? true : false;   // TRUE
+		type nevNull = never extends null ? true : false;       // TRUE
+		type nevObj = never extends object ? true : false;      // TRUE
+		type nevStr = never extends string ? true : false;      // TRUE
+	}
+
+
+	let str1: string = 'foo'
+	let any1: any = str1; 
+	console.log(any1);
+
+	let unk1: unknown = str1; 
+	console.log(unk1);
+
+	let any2: any;
+	let unk2: unknown; 
+	let stringA: string = any2;
+	//let stringB: string = unk2;
+
+	if(void 2 === undefined) {
+		console.log("true");
+	}
+
+	type Dog = {
+		name: string;
+		barks: boolean;
+	}
+
+	type Cat = {
+		name: string;
+		purrs: boolean;
+	}
+
+
+	// Union
+	// Dog | Cat | Dog+Cat
+	type DogOrCat = Dog | Cat;
+	let b1: DogOrCat = { name: "DogAndCat", purrs: true, barks: true };
+	console.log(b1);
+
+	let b2: DogOrCat = { name: "DogAndCat", purrs: true };
+	console.log(b2);
+
+	let b3: DogOrCat = { name: "DogAndCat", barks: true };
+	console.log(b3);
+
+	
+	// Intersection
+	// Only Dog+Cat
+	type DogAndCat = Dog & Cat;
+	let a1: DogAndCat = { name: "DogAndCat", purrs: true, barks: true };
+	console.log(a1);
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+
+	const str = num.toString().split("");
+
+	return parseInt(str.map(elem => parseInt(elem)**2).join(""));
+}
 
 // Функция получает в первом аргументе число, представляющее первое числовое значение в диапазоне. 
 // Второй аргумент также является числом, представляющим вторую границу диапазона (включительно). 
