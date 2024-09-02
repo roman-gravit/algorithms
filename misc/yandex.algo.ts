@@ -6,6 +6,133 @@ export { FindNonMinOrMax, FindNumberOfPairsForce, FindNumberOfPairsTwoPointers, 
 
 function SquareEachDigit(num: number): number {
 
+	{
+
+		interface BuildableRequest {
+			data?: object
+			method: 'get' | 'post'
+			url: string
+		}
+
+		class RequestBuilder2 {
+			data?: object
+			method?: 'get' | 'post'
+			url?: string
+		  
+			setData(value: object): this & Pick<BuildableRequest, 'data'> {
+			  return Object.assign(this, { data: value })
+			}
+		  
+			setMethod(value: 'get' | 'post'): this & Pick<BuildableRequest, 'method'> {
+			  return Object.assign(this, { method: value })
+			}
+		  
+			setURL(value: string): this & Pick<BuildableRequest, 'url'> {
+			  return Object.assign(this, { url: value })
+			}
+		  
+			build(this: BuildableRequest) {
+			  return this
+			}
+		}
+
+		const obj1 = new RequestBuilder2()
+		    .setData({})
+		    .setMethod('post') 
+		    .setURL('bar') 
+		    .build()  
+
+		const obj2 = new RequestBuilder2()
+		    .setURL('foo') 
+			.setData({})
+		    .setMethod('get')
+		    .build()
+
+	}
+
+
+	// pattern Factory
+	{
+
+		interface Shoe {
+			purpose: string;
+		}
+
+		class BalletFlat implements Shoe {
+			purpose = "dancing";
+		}
+
+		class Boot implements Shoe {
+			purpose = "woodcutting";
+		}
+
+		class Sneaker implements Shoe {
+			purpose = "walking";
+		}
+
+		type ShoeCreator = {
+			create(type: "balletFlat"): BalletFlat
+			create(type: "boot"): Boot
+			create(type: "sneaker"): Sneaker
+		  }
+
+		let ShoeFactory: ShoeCreator = {
+			create(type: "balletFlat" | "boot" | "sneaker"): Shoe {
+				switch (type) {
+					case "balletFlat": return new BalletFlat();
+					case "boot": return new Boot();
+					case "sneaker": return new Sneaker();
+				}
+			}
+		}
+
+		let shoe = ShoeFactory.create("balletFlat");
+		let check = shoe instanceof BalletFlat;
+		console.log(check);
+
+		shoe = ShoeFactory.create("boot");
+		check = shoe instanceof Boot;
+		console.log(check);
+		check = shoe instanceof BalletFlat;
+		console.log(check);
+
+		shoe = ShoeFactory.create("sneaker");
+		check = shoe instanceof Sneaker;
+		console.log(check);
+
+	}	
+
+	{
+		type Reserve = { 
+			(from: Date, to: Date, destination: string): void 
+			(from: Date, destination: string): void
+			(destination: string): void
+		};
+
+
+		let reserve: Reserve = (from: Date | string, to?: Date | string, destination?: string) => {
+			console.log(`Vacation from: ${from} to: ${to} country: ${destination}`);
+		}
+
+		reserve(new Date(), new Date(), "Spain");
+		reserve(new Date(), "Italy");
+		reserve("US");
+	}
+
+	{
+
+		function Is<T>(a: T, ...args: [T, ...T[]]): boolean {
+			console.log(`1: ${args}`);
+			return args[0] === args[1];
+		}
+
+		let result = Is("str", "str1");
+		result = Is(true, false);
+		result = Is(42, 42);
+		//result = Is(42, true);
+		result = Is(42, 42, 58);
+	}
+
 	// types tests
 	{
 		// unknown: ANY
@@ -66,54 +193,56 @@ function SquareEachDigit(num: number): number {
 		type nevStr = never extends string ? true : false;      // TRUE
 	}
 
-
-	let str1: string = 'foo'
-	let any1: any = str1; 
-	console.log(any1);
-
-	let unk1: unknown = str1; 
-	console.log(unk1);
-
-	let any2: any;
-	let unk2: unknown; 
-	let stringA: string = any2;
-	//let stringB: string = unk2;
-
-	if(void 2 === undefined) {
-		console.log("true");
-	}
-
-	type Dog = {
-		name: string;
-		barks: boolean;
-	}
-
-	type Cat = {
-		name: string;
-		purrs: boolean;
-	}
-
-
-	// Union
-	// Dog | Cat | Dog+Cat
-	type DogOrCat = Dog | Cat;
-	let b1: DogOrCat = { name: "DogAndCat", purrs: true, barks: true };
-	console.log(b1);
-
-	let b2: DogOrCat = { name: "DogAndCat", purrs: true };
-	console.log(b2);
-
-	let b3: DogOrCat = { name: "DogAndCat", barks: true };
-	console.log(b3);
-
+	// union intersection
+	{
+		let str1: string = 'foo'
+		let any1: any = str1; 
+		console.log(any1);
 	
-	// Intersection
-	// Only Dog+Cat
-	type DogAndCat = Dog & Cat;
-	let a1: DogAndCat = { name: "DogAndCat", purrs: true, barks: true };
-	console.log(a1);
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
-
+		let unk1: unknown = str1; 
+		console.log(unk1);
+	
+		let any2: any;
+		let unk2: unknown; 
+		let stringA: string = any2;
+		//let stringB: string = unk2;
+	
+		if(void 2 === undefined) {
+			console.log("true");
+		}
+	
+		type Dog = {
+			name: string;
+			barks: boolean;
+		}
+	
+		type Cat = {
+			name: string;
+			purrs: boolean;
+		}
+	
+	
+		// Union
+		// Dog | Cat | Dog+Cat
+		type DogOrCat = Dog | Cat;
+		let b1: DogOrCat = { name: "DogAndCat", purrs: true, barks: true };
+		console.log(b1);
+	
+		let b2: DogOrCat = { name: "DogAndCat", purrs: true };
+		console.log(b2);
+	
+		let b3: DogOrCat = { name: "DogAndCat", barks: true };
+		console.log(b3);
+	
+		let h = null;
+		
+		// Intersection
+		// Only Dog+Cat
+		type DogAndCat = Dog & Cat;
+		let a1: DogAndCat = { name: "DogAndCat", purrs: true, barks: true };
+		console.log(a1);
+	}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
 	const str = num.toString().split("");
 
 	return parseInt(str.map(elem => parseInt(elem)**2).join(""));
