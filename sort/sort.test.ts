@@ -13,7 +13,9 @@ const sort_data = [
     [ [109, 41, 3, 200, 101, 2, 5, 9, 1, 54, 98, 4, 42, 10, 6, 8, 53],   [1, 2, 3, 4, 5, 6, 8, 9, 10, 41, 42, 53, 54, 98, 101, 109, 200] ]
 ];
 
-test("SortArrayBucket",  () => {
+beforeAll(() => console.log("starting..."));
+
+test("SortArrayBucket",  () => {	
 	for(const data of sort_data) {
 		const result = SortArrayBucket([...data[0]]);
 		expect(result).toEqual(data[1]);
@@ -75,3 +77,5 @@ test("SortArrayModifiedBubble",  () => {
 		expect(result).toEqual(data[1]);
 	}
 });
+
+afterAll(() => console.log("*** end ***"));

@@ -1,10 +1,21 @@
 export { FindNonMinOrMax, FindNumberOfPairsForce, FindNumberOfPairsTwoPointers, LeftBinSearch, GetLuckyNumber, QueryObjectify, AddNewCategories, 
 	CategoryData, Category, AddNewCategoriesResult, ChangeVowelInString, IsMeetingInsideWorkingDay, CreateRange, RangeFunction,
-	SquareEachDigit
+	SquareEachDigit, getField
 };
 
+function getField(dimension: number): Array<Array<null>> {
+	const field = Array<Array<null>>();
+
+	for(let i = 0; i < dimension; i++) {
+		field.push(new Array(dimension).fill(null));
+	}
+
+	return field;
+}
 
 function SquareEachDigit(num: number): number {
+
+
 
 	{
 

@@ -1,7 +1,15 @@
 import { FindNonMinOrMax, FindNumberOfPairsForce, FindNumberOfPairsTwoPointers, LeftBinSearch, GetLuckyNumber, 
 	QueryObjectify, AddNewCategories, Category, AddNewCategoriesResult, ChangeVowelInString, IsMeetingInsideWorkingDay,
-	CreateRange, RangeFunction, SquareEachDigit
+	CreateRange, RangeFunction, SquareEachDigit, getField
 } from "./yandex.algo";
+
+test('getField', () => {
+	expect(getField(1)).toEqual([[null]]);
+	expect(getField(2)).toEqual([[null, null], [null, null]]);
+	expect(getField(3)).toEqual(
+	  [[null, null, null], [null, null, null], [null, null, null]],
+	);
+});
 
 test("SquareEachDigit", () => {
 	expect(SquareEachDigit(31)).toBe(91);
