@@ -1,4 +1,3 @@
-
 /* eslint-env node */
 
 "use strict";
@@ -42,7 +41,7 @@ module.exports = {
     ],
 
     "parserOptions": {
-         "project": "./js/tsconfig.json",
+         "project": "tsconfig.json",
          "tsconfigRootDir": __dirname,
          ecmaVersion: 2018, // Allows for the parsing of modern ECMAScript features
          sourceType: "module", // Allows for the use of imports

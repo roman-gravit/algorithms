@@ -11,8 +11,8 @@ interface Node2 {
 function SearchGraphBFSWhile(start: Node2, target: Node2): Node2[] {
     // Breadth-first search(BFS) Graph
     // It visits ALL NEIGHBORS nodes first and then moving on to next-level neighbors, and so on.
-    let queue: Node2[] = [];
-    let result: Node2[] = [];
+    const queue: Node2[] = [];
+    const result: Node2[] = [];
 
     start.visited = true;
     queue.push(start);
@@ -46,7 +46,7 @@ function SearchGraphDFSWhile(start: Node2, target: Node2): Node2[] {
     // then retrace our steps and see connected nodes not visited and repeat the process. 
     // All nodes in each level (vertically) should be visited before to go next level.
 
-    let result: Node2[] = [];
+    const result: Node2[] = [];
     const stack: Node2[] = [start];
     const visited = new Set();
 
@@ -93,11 +93,11 @@ class Node<T> {
         this.children.push(node);
     }
 
-    RemoveNode(node: Node<T>): Node<T> | null {
-        let index = this.children.findIndex(
-            (node) => this.comparator(node.data, this.data) == 0
+    RemoveNode(_node: Node<T>): Node<T> | null {
+        const index = this.children.findIndex(
+            (elem) => this.comparator(elem.data, this.data) === 0
         );
-        if (index != -1) {
+        if (index !== -1) {
             return this.children.splice(index, 1)[0];
         }
         return null;
@@ -119,7 +119,7 @@ class Graph<T> {
     AddNode(data: T): Node<T> {
         let node = this.nodes.get(data);
         // if the node is already in the graph, then there is no need to build it
-        if (node != null) {
+        if (node !== null) {
             return node;
         }
         // if the node is not already in the graph, then create a node and set the node into the map of nodes
@@ -128,14 +128,14 @@ class Graph<T> {
         return node;
     }
 
-    removeNode(data: T) {
-        let nodeToRemove = this.nodes.get(data);
+    removeNode(data: T): Node<T> {
+        const nodeToRemove = this.nodes.get(data);
     
         this.nodes.forEach((node) => {
             // if nodeToRemove is not undefined and if node in graph contains nodeToRemove in list of adjacent nodes
             if (nodeToRemove && node.children.includes(nodeToRemove)){
                 // remove nodeToRemove
-                node.RemoveNode(nodeToRemove)
+                node.RemoveNode(nodeToRemove);
             }
         });
 
@@ -144,8 +144,8 @@ class Graph<T> {
     }
 
     addEdge(source: T, destination: T): void {
-        let sourceNode: Node<T> = this.AddNode(source);
-        let destinationNode: Node<T> = this.AddNode(destination);
+        const sourceNode: Node<T> = this.AddNode(source);
+        const destinationNode: Node<T> = this.AddNode(destination);
     
         // add the destination node to the list of adjacent nodes for the destination node.
         sourceNode.AddNode(destinationNode);
@@ -153,9 +153,9 @@ class Graph<T> {
 
     removeEdge(source: T, destination: T): void {
         //get the source node
-        let sourceNode: Node<T> | undefined = this.nodes.get(source);
+        const sourceNode: Node<T> | undefined = this.nodes.get(source);
         //get the destination node
-        let destinationNode: Node<T> | undefined = this.nodes.get(destination);
+        const destinationNode: Node<T> | undefined = this.nodes.get(destination);
     
         //remove the destination from the list of adjacent nodes on the source node
         if (sourceNode && destinationNode) {
@@ -180,14 +180,14 @@ function SearchGraphBFS<T>(data: Graph<T>, search: T): T | null {
     queue.push(start_node);
     
     while (queue.length !== 0){
-        let current: Node<T> | undefined = queue.shift();
+        const current: Node<T> | undefined = queue.shift();
         if (!current){
             continue;
         }
 
         if(current.data === search) {
             return current.data;
-        };
+        }
     
         visited.push(current);
             
@@ -196,7 +196,7 @@ function SearchGraphBFS<T>(data: Graph<T>, search: T): T | null {
                 visited.push(node);
                 queue.push(node);
             }
-        })
+        });
     }
 
     return null;
@@ -213,7 +213,7 @@ function SearchGraphDFS<T>(start_node: Node<T>, search: Node<T>): T | null {
 
     if(start_node.data === search.data) {
         return search.data;
-    };
+    }
 
     if(start_node.visited) {
         return null;
