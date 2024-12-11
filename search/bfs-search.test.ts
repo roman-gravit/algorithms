@@ -1,5 +1,4 @@
 import { BreadthFirstSearch } from "./bfs-search";
-
 describe("BreadthFirstSearch",  () => {
 
 	test("functionExists", () => {
