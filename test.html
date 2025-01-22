@@ -4,8 +4,27 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Document</title>
+	<style>
+		#container {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			height: 100vh;
+		}
+		#test {
+			border: 1px solid red;
+			width: 100px;
+			height: 100px;
+			position: absolute;
+			top: calc(50%);
+			left: calc(50%);
+			transform: translate(-50%, -50%);
+		}
+	</style>
 </head>
 <body>
-	<div onclick1="alert('div')"><a href="https://www.google.com">A click</a></div>
+	<div id="container1">
+		<div id="test">Center</div>
+	</div>
 </body>
 </html>

@@ -1,28 +1,53 @@
 describe("test",  () => {
 	test("test", () => {
+		const str = "One two three";
 
-		function sum(num1?: number): any {
-			if(num1 === undefined) {
-				return 0;				
-			}
-			const args = [num1];
-			return function inner(num2?: number) {
-				if(num2 === undefined) {
-					return args.reduce((accum, current) => {
-						return accum + current;
-					}, 0);				
-				}
-				args.push(num2);
-				return inner;
-			};
-
+		function reverseWords(str: string): string {
+			const words = str.split(" ");
+			return words.reduce((accum: string[], current: string) => {
+				current = current.split("").reverse().join("");
+				accum.push(current);
+				return accum;
+			}, []).join(" ");
 		}
 
+		console.log(reverseWords(str));
 
-		console.log(sum()); //0
-		console.log(sum(1)()); //1
-		console.log(sum(2)(3)()); //5
-		console.log(sum(12)(13)(11)()); //36
+		type Person = {
+			name: string;
+			age: number;
+		};
+		
+		function printPerson(person: Person): void {
+			for (const key in person) {
+				console.log(`${key}: ${person[key as keyof Person]}`);
+			}
+		}
+		
+		printPerson({name: "Mike", age: 40});
 	});
 	
+	// object  : USE!  Can be any non-primitive type.
+	// Object  : Don't use `Object` as a type. The `Object` type actually means "any non-nullish value"
+	// {}      : Don't use `{}` as a type. `{}` actually means "any non-nullish value".
+	// Object and {} : any value except null | undefined
+	let obj: object;
+	obj = [];
+	console.log(obj);
+
+	type Person = {
+		name: string;
+		surName: string;
+		age: number;
+		profession?: string;
+	};
+
+	
+
+	type MyPick<Type, Key extends keyof Type> = {
+		[Property in Key]: Type[Key]; 
+	}
+
+	type pp = MyPick<Person, "name">
+
 });
