@@ -34,12 +34,12 @@ function SortArrayBucket(array: Array<number>):  Array<number> {
         } else if (current > max) {
             max = current;
         }
-    })
+    });
 
     // Create buckets depending in min and max and sinlge bucket size
     const bucket_size = 50;
     const bucket_count = Math.floor((max - min) / bucket_size) + 1;
-    const all_buckets = new Array(bucket_count);
+    const all_buckets = new Array<number[]>(bucket_count);
     for (let i = 0; i < all_buckets.length; i++) {
         all_buckets[i] = [];
     }
@@ -55,7 +55,7 @@ function SortArrayBucket(array: Array<number>):  Array<number> {
     all_buckets.forEach(function(bucket: Array<number>) {
         SortArrayInsertion(bucket);
         bucket.forEach(function (element) {
-            array.push(element)
+            array.push(element);
         });
     });
     return array;
