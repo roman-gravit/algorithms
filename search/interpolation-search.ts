@@ -12,7 +12,7 @@ export { InterpolationSearch };
  *  This can make it more efficient than binary search for certain types of data.
  */
 
-function InterpolationSearch(arr: Array<number>, target: number) : number {
+function InterpolationSearch(arr: Array<number>, target: number): number {
 	let low = 0;
 	let high = arr.length - 1;
 
@@ -25,7 +25,7 @@ function InterpolationSearch(arr: Array<number>, target: number) : number {
 			}
 		}
 
-		let pos = low + Math.floor( ((high-low)/(arr[high]-arr[low])) * (target-arr[low]) );
+		const pos = low + Math.floor( ((high-low)/(arr[high]-arr[low])) * (target-arr[low]) );
 
 		if(arr[pos] === target) {
 			return pos;

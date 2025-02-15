@@ -6,55 +6,90 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 
-
-const garbage_pattern = 170;
-const garbage_length = 3;
-function write() {
-	const result = [];
-	let pattern = garbage_pattern;
-	for(let index = 0; index < garbage_length; index++) {
-		let garbage_byte = GenerateRandomUInt(256);
-		if((garbage_byte ^ pattern) === 0) {
-			garbage_byte = GenerateRandomUInt(256);
-			if((garbage_byte ^ pattern) === 0) {
-				garbage_byte++;
+const map = {"{": "}", "(": ")", "[": "]"};
+const reg = /[{}()[\]]/g;
+function validateBrackets(brackets) {
+	if(!brackets) {
+		return true;
+	}
+	const test = [];
+	for(const bracket of brackets) {
+		if(!bracket.match(reg)) {
+			console.log("false", bracket);
+			continue;
+		}
+		if(map[bracket]) {
+			test.push(map[bracket]);
+		} else {
+			if(bracket!==test.pop()) {
+				return false;
 			}
 		}
-		result.push(garbage_byte);
-		pattern = pattern ^ garbage_byte;
 	}
-	result.push(pattern);
-	return result;
+	return test.length === 0;
 }
 
-function read(input) {
-	const result = [];
-	const max_garbage_bytes = 1024 * 1024;
-	let pattern = garbage_pattern;
-	let garbage_bytes_read = 0;
-	for(; garbage_bytes_read < max_garbage_bytes; garbage_bytes_read++) {
-		const garbage_byte = input[garbage_bytes_read];
-		if((garbage_byte ^ pattern) === 0) {
-			break;
+//console.log(validateBrackets("{}") === true);  // 
+//console.log(validateBrackets("}") === false); // 
+//console.log(validateBrackets("{[}]") === false);
+//console.log(validateBrackets("[{[]}()]") === true);
+console.log(validateBrackets("(]{qw}e)"));
+
+if (false) {
+const test1 ="ABCDEFG";
+
+function testStr(str) {
+	const hash = {};
+	for(const char of str) {
+		hash[char] = 1;
+	}
+	
+	for(const char of test1) {
+		if(!hash[char]) {
+			return false;
 		}
-		pattern = (pattern ^ garbage_byte);
 	}
-
-	return input.slice(++garbage_bytes_read);
+	return true;
 }
 
-const encr = write();
-console.log("WRITE Pattern , result", garbage_pattern, encr);
+console.log(testStr("ABCDEFG"));
+console.log(testStr("ABCDEG"));
 
-// add data
-encr.push(1, 2, 3, 4, 5);
-const decr = read(encr);
-console.log("READ Pattern , result", garbage_pattern, decr);
-
-function GenerateRandomUInt(range_max) {
-    return Math.floor(Math.random() * Math.floor(range_max));
 }
 
+function callLimit(fn, limit, callback) {
+	let count = limit;
+	const inner = function(...args) {
+		if(count--){
+			if(!count && callback){
+				setTimeout(() => {
+					callback();
+				}, 0);
+			}
+			return fn(...args);
+		} 
+	};
+	inner.reset = () => {
+		count = limit;
+	};
+	return inner;
+}
+
+function log(title, message) {
+	console.log(title + ":" + message);
+}
+
+const loglimit = callLimit(log, 3);
+loglimit("title1", "desc");
+loglimit("title2", "desc");
+loglimit("title3", "desc");
+loglimit("title4", "desc");  //skip
+
+loglimit.reset();
+loglimit("title5", "desc");
+loglimit("title6", "desc");
+loglimit("title7", "desc");
+loglimit("title8", "desc");
 
 if(false) {
 

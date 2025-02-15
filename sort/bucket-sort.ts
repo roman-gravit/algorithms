@@ -1,6 +1,6 @@
 export { SortArrayBucket };
 
-import { SortArrayInsertion } from "./insertion-sort";
+import { SortArrayInsertion } from "./insertion-sort.js";
 
 
 

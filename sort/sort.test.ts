@@ -1,9 +1,9 @@
-import { SortArrayBubble, SortArrayModifiedBubble } from "./bubble-sort";
-import { SortArraySelection } from "./selection-sort";
-import { SortArrayInsertion } from "./insertion-sort";
-import { SortArrayMerge } from "./merge-sort";
-import { SortQuickArray,  SortQuickArrayMutation, SortQuickArrayMutation2 } from "./quick-sort";
-import { SortArrayBucket } from "./bucket-sort";
+import { SortArrayBubble, SortArrayModifiedBubble } from "./bubble-sort.js";
+import { SortArraySelection } from "./selection-sort.js";
+import { SortArrayInsertion } from "./insertion-sort.js";
+import { SortArrayMerge } from "./merge-sort.js";
+import { SortQuickArray,  SortQuickArrayMutation, SortQuickArrayMutation2 } from "./quick-sort.js";
+import { SortArrayBucket } from "./bucket-sort.js";
 
 const sort_data = [
     [ [64, 34, 25, 12, 22, 11, 90, 100, 5],   [5, 11, 12, 22, 25, 34, 64, 90, 100] ],

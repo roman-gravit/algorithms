@@ -1,7 +1,8 @@
+/* eslint-disable quotes */
 import { FindNonMinOrMax, FindNumberOfPairsForce, FindNumberOfPairsTwoPointers, LeftBinSearch, GetLuckyNumber, 
 	QueryObjectify, AddNewCategories, Category, AddNewCategoriesResult, ChangeVowelInString, IsMeetingInsideWorkingDay,
 	CreateRange, RangeFunction, SquareEachDigit, getField
-} from "./yandex.algo";
+} from "./yandex.algo.js";
 
 test('getField', () => {
 	expect(getField(1)).toEqual([[null]]);
@@ -87,17 +88,17 @@ test("AddNewCategories", () => {
 
 test("increment", () => {
 
-	const data = ["banana", "banana", "grape", "banana", "grape", "orange" ,"banana"];
+	const data = ["banana", "banana", "grape", "banana", "grape", "orange", "banana"];
 	function GetUnique(fruits: string[]): string[] {	
 		const map = new Map<string, number>();
-		for(let fruit of fruits) {
+		for(const fruit of fruits) {
 			map.set(fruit, (map.get(fruit) || 0) + 1);
 		}
 		
-		const array = Array.from(map)
+		const array = Array.from(map);
 		array.sort(function(item1, item2) {
 			return item2[1] - item1[1];
-		}) //'[ {"banana": 4}, {"grape": 2}, {"orange": 1} ]
+		}); //'[ {"banana": 4}, {"grape": 2}, {"orange": 1} ]
 
 		return [...array.values()].map(item => {
 			return item[0];
@@ -110,7 +111,7 @@ test("increment", () => {
 		let counter = 0;
 		return () => {
 			return ++counter;
-		}
+		};
 	}();
 
 	expect(inc()).toBe(1);
@@ -157,10 +158,10 @@ describe("FindNumberOfPairsTwoPointers",  () => {
 	});
 
 	test("two elements in array", () => {
-		expect(FindNumberOfPairsTwoPointers([1,2], 3)).toBe(0);
-		expect(FindNumberOfPairsTwoPointers([1,5], 3)).toBe(1);
-		expect(FindNumberOfPairsTwoPointers([1,2,7], 3)).toBe(2);
-		expect(FindNumberOfPairsTwoPointers([1,3,7,8], 4)).toBe(3);
+		expect(FindNumberOfPairsTwoPointers([1, 2], 3)).toBe(0);
+		expect(FindNumberOfPairsTwoPointers([1, 5], 3)).toBe(1);
+		expect(FindNumberOfPairsTwoPointers([1, 2, 7], 3)).toBe(2);
+		expect(FindNumberOfPairsTwoPointers([1, 3, 7, 8], 4)).toBe(3);
 	});
 
 });
@@ -175,10 +176,10 @@ describe("FindNumberOfPairsForce",  () => {
 	});
 
 	test("two elements in array", () => {
-		expect(FindNumberOfPairsForce([1,2], 3)).toBe(0);
-		expect(FindNumberOfPairsForce([1,5], 3)).toBe(1);
-		expect(FindNumberOfPairsForce([1,2,7], 3)).toBe(2);
-		expect(FindNumberOfPairsForce([1,3,7,8], 4)).toBe(3);
+		expect(FindNumberOfPairsForce([1, 2], 3)).toBe(0);
+		expect(FindNumberOfPairsForce([1, 5], 3)).toBe(1);
+		expect(FindNumberOfPairsForce([1, 2, 7], 3)).toBe(2);
+		expect(FindNumberOfPairsForce([1, 3, 7, 8], 4)).toBe(3);
 	});
 
 });

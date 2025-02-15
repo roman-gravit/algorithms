@@ -1,4 +1,4 @@
-import { BreadthFirstSearch } from "./bfs-search";
+import { BreadthFirstSearch } from "./bfs-search.js";
 describe("BreadthFirstSearch",  () => {
 
 	test("functionExists", () => {

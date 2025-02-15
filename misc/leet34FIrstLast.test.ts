@@ -1,4 +1,4 @@
-import { searchRange } from "./leet34FIrstLast";
+import { searchRange } from "./leet34FIrstLast.js";
 
 describe("searchRange", () => {
 

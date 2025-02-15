@@ -1,6 +1,6 @@
-import { SearchArrayLinear } from "./linear-search";
-import { SearchArrayBinaryIterative, SearchArrayBinaryRecursive } from "./binary-search";
-import { InterpolationSearch } from "./interpolation-search";
+import { SearchArrayLinear } from "./linear-search.js";
+import { SearchArrayBinaryIterative, SearchArrayBinaryRecursive } from "./binary-search.js";
+import { InterpolationSearch } from "./interpolation-search.js";
 
 const search_data: Array<[Array<number>, number, number]> = [
 	[ [1, 2, 3, 4], 1, 0],
@@ -11,7 +11,7 @@ const search_data: Array<[Array<number>, number, number]> = [
 	[ [1, 2, 3, 4, 5, 6, 7, 8], 1,  0],
 	[ [1, 2, 3, 4, 5], 5,  4],
 	[ [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24], 2,  1],
-]
+];
 
 test("InterpolationSearch",  () => {
 	for(const data of search_data) {

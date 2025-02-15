@@ -1,8 +1,8 @@
-import { Node2, SearchGraphDFSWhile, SearchGraphBFSWhile} from "./graph-BFS-DFS-search";
-import { SearchGraphBFS, SearchGraphDFS, Node, Graph } from "./graph-BFS-DFS-search";
+import { Node2, SearchGraphDFSWhile, SearchGraphBFSWhile} from "./graph-BFS-DFS-search.js";
+import { SearchGraphBFS, SearchGraphDFS, Node, Graph } from "./graph-BFS-DFS-search.js";
 
 
-function comparator(a: number, b: number) {
+function comparator(a: number, b: number): -1 | 0 | 1  {
     if (a < b) {
         return -1;
     } else if (a > b) {
@@ -109,7 +109,7 @@ test("SearchGraphBFS",  () => {
 
 	for(const data of search_data) {
 		const result = SearchGraphBFS(graph, data);
-		expect(result).not.toBeNull()
+		expect(result).not.toBeNull();
 	}
 });
 
@@ -118,6 +118,6 @@ test("SearchGraphDFS",  () => {
 	for(const data of search_data) {
 		const graph: Graph<number> = _CreateGraph();
 		const result = SearchGraphDFS(graph.root, new Node<number>(data, comparator));
-		expect(result).not.toBeNull()
+		expect(result).not.toBeNull();
 	}
 });

@@ -1,6 +1,6 @@
 export { BreadthFirstSearch, Vertex };
 
-import { Vertex } from "./bfs-search.types";
+import { Vertex } from "./bfs-search.types.js";
 
 function BreadthFirstSearch(graph: Vertex, name: string): string | null {
 	const queue: Vertex[] = [];

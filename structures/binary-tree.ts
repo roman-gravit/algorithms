@@ -24,6 +24,7 @@ class BinaryTree {
 			return this;
 		}
 		let current = this.root;
+		// eslint-disable-next-line no-constant-condition
 		while(true) {
 			if(value < current.value) {
 				if(!current.left) {

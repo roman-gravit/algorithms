@@ -1,4 +1,4 @@
-import { fib_Recursive, fib_While } from "./fibonacci";
+import { fib_Recursive, fib_While } from "./fibonacci.js";
 
 describe("Fibonacci", () => {
 
